@@ -11,7 +11,7 @@ router.post("/", controller.add);
 router.put("/:id", controller.update);
 //delete
 router.delete("/", controller.delete);
-//router.delete("/", controller.deleteAll);
+router.delete("/apagatudo", controller.deleteAll);
 
 module.exports = router;
 

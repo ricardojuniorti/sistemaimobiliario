@@ -65,12 +65,12 @@ module.exports = class usuarioService {
       }
     }
 
-    static async deleteTodosUsuarios(usuarioId) {
+    static async deleteTodosUsuarios() {
       try {
         const deletedAllResponse = await usuariosColecao.deleteMany();
         return deletedAllResponse;
-      } catch (error) {res.status(201).json(`Registro adicionado com sucesso!`);
-        console.log(`Não foi possível deletar todos${error}`);
+      } catch (error) {
+        res.status(500).json(`Ocorreu um erro!`);
       }
     }
 
