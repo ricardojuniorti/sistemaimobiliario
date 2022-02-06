@@ -64,10 +64,10 @@ exports.update = async (req, res) => {
 };
   
 exports.delete = async (req, res) => {
-    let id = req.params.id;
+    //let id = req.params.id;
   
     try {
-      const deleteResponse = await usuarioService.deleteUsuario(id);
+      const deleteResponse = await usuarioService.deleteUsuario(req.body._id);
       res.json(deleteResponse);
     } catch (error) {
       res.status(500).json({ error: error });
