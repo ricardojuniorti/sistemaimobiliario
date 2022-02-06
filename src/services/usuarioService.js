@@ -1,5 +1,5 @@
 const { deleteMany } = require("../models/usuariosModel");
-const Todo = require("../models/usuariosModel");
+const usuarios = require("../models/usuariosModel");
 
 module.exports = class usuarioService {
 
@@ -14,7 +14,7 @@ module.exports = class usuarioService {
 
     static async getAllUsuarios(){
         try {
-            const allUsuarios = await usuariosColecao.find();   
+            const allUsuarios = await usuariosColecao.find().populate('perfilusuario');   
               return allUsuarios;   
             
         } catch (error) {
@@ -30,6 +30,7 @@ module.exports = class usuarioService {
                 endereco: data.endereco,
                 telefone: data.telefone,
                 cpf:      data.cpf,
+                perfilusuario: data.perfilusuario,
                 profissao: data.profissao,
                 dataCriacao: data.dataCriacao,
                 dataAtualizacao: data.dataAtualizacao,

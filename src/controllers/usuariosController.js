@@ -46,6 +46,7 @@ exports.update = async (req, res) => {
       usuario.endereco = req.body.endereco;
       usuario.telefone = req.body.telefone;
       usuario.cpf = req.body.cpf;
+      usuario.perfilusuario = req.body.perfilusuario;
       usuario.profissao = req.body.profissao;
       usuario.dataCriacao = req.body.dataCriacao;
       usuario.dataAtualizacao = req.body.dataAtualizacao;

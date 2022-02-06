@@ -2,25 +2,31 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const sistemaImobiliarioSchema = Schema({
+    
     nome: {
         type: String,
-        require: true,
+        require: true
     },
     endereco: {
         type: String,
-        require: true,
+        require: true
     },
     cpf: {
         type: String,
-        require: false,
+        require: false
+    },
+    perfilusuario: {
+        type: mongoose.ObjectId,
+        ref: 'perfil_usuarios', // nomde da coleção referenciada
+        require: true
     },
     telefone: {
         type: String,
-        require: false,
+        require: false
     },
     profissao: {
         type: String,
-        require: true,
+        require: true
     },
 
     // campos padroes de todas as tabelas
@@ -31,8 +37,7 @@ const sistemaImobiliarioSchema = Schema({
     dataAtualizacao: {
         type: Date,
         default: Date.now(),
-    },
-    
+    }
 });
 
 module.exports = usuariosColecao = mongoose.model("usuarios", sistemaImobiliarioSchema);
