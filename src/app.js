@@ -12,6 +12,8 @@ const indexRouter = require("./routers/index");
 const usuarioRouter = require("./routers/usuarios");
 const perfil_usuarioRouter = require("./routers/perfil_usuarios");
 
+// chamando a index
+app.use("/sistema_imobiliario", indexRouter);
 
 // rota para tela de usuarios
 app.use("/sistema_imobiliario/usuarios", usuarioRouter);

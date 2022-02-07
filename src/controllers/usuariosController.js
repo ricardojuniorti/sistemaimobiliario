@@ -31,8 +31,9 @@ exports.add = async (req, res) => {
     try {
         const createdUsuario = await usuarioService.addUsuario(req.body);
         res.status(201).json(createdUsuario);
-    }catch (error) {
-        return res.status(500).json({ error: err});
+        
+    }catch (err) {
+      res.status(500).send("Erro ao tentar gravar usuario");
     }
 
 }
@@ -46,6 +47,9 @@ exports.update = async (req, res) => {
       usuario.endereco = req.body.endereco;
       usuario.telefone = req.body.telefone;
       usuario.cpf = req.body.cpf;
+      usuario.email = req.body.email;
+      usuario.login = req.body.login;
+      usuario.senha = req.body.senha;
       usuario.perfilusuario = req.body.perfilusuario;
       usuario.profissao = req.body.profissao;
       usuario.dataCriacao = req.body.dataCriacao;
