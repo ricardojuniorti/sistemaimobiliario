@@ -6,7 +6,7 @@ exports.get = async (req, res) => {
     let id = req.params.id;
   
     try {
-      const usuario = await usuarioService.getUsuariobyId(id);
+      const usuarios = await usuarioService.getUsuariobyId(id);
       res.json(usuarios);
     } catch (err) {
       res.status(500).send("Erro ao tentar listar o usuario");
