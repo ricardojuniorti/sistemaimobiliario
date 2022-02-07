@@ -7,9 +7,9 @@ exports.get = async (req, res) => {
   
     try {
       const usuarios = await usuarioService.getUsuariobyId(id);
-      res.json(usuarios);
-    } catch (err) {
-      res.status(500).send("Erro ao tentar listar o usuario");
+      res.status(200).json(usuarios);
+    } catch (error) {
+      res.status(500).json({ error: error});
     }
 };
 
@@ -21,8 +21,8 @@ exports.getAll = async (req, res) => {
             return res.status(404).json("Nenhum usuario encontrado!");
         }
         res.json(usuarios);
-    }catch (err) {
-      res.status(500).send("Erro ao tentar listar todos usuarios");
+    }catch (error) {
+      res.status(500).json({ error: error});
     }
 }
 
@@ -31,8 +31,8 @@ exports.add = async (req, res) => {
         const createdUsuario = await usuarioService.addUsuario(req.body);
         res.status(201).json(createdUsuario);
         
-    }catch (err) {
-      res.status(500).send("Erro ao tentar gravar usuario");
+    }catch (error) {
+      res.status(500).json({ error: error});
     }
 
 }

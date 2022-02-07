@@ -22,8 +22,8 @@ exports.getAll = async (req, res) => {
             return res.status(404).json("Nenhum registro encontrado!");
         }
         res.json(perfil_usuarios);
-    }catch (err) {
-        return res.status(500).json({error: err});
+    }catch (error) {
+        return res.status(500).json({error: error});
     }
 }
 
@@ -32,7 +32,7 @@ exports.add = async (req, res) => {
         const createdPerfil_usuario = await perfil_usuarioService.addPerfil_usuario(req.body);
         res.status(201).json(createdPerfil_usuario);
     }catch (error) {
-        return res.status(500).json({ error: err});
+        return res.status(500).json({ error: error});
     }
 
 }
