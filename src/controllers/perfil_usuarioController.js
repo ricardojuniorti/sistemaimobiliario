@@ -46,7 +46,7 @@ exports.update = async (req, res) => {
       perfil_usuario.dataCriacao = req.body.dataCriacao;
       perfil_usuario.dataAtualizacao = req.body.dataAtualizacao;
   
-      const updatedPerfil_usuario = await eprfil_usuarioService.updatePerfil_usuario(id, perfil_usuario);
+      const updatedPerfil_usuario = await perfil_usuarioService.updatePerfil_usuario(id, perfil_usuario);
   
       if (updatedPerfil_usuario.nModified === 0) {
         return res.status(404).json({});

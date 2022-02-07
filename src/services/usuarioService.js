@@ -5,7 +5,7 @@ module.exports = class usuarioService {
 
     static async getUsuariobyId(usuarioId) {
       try {
-        const usuario = await usuariosColecao.findById({ _id: usuarioId });
+        const usuario = await Usuarios.findById({ _id: usuarioId });
         return usuario;
       } catch (error) {
         console.log(`Usuario não encontrado. ${error}`);
@@ -14,7 +14,7 @@ module.exports = class usuarioService {
 
     static async getAllUsuarios(){
         try {
-            const allUsuarios = await usuariosColecao.find().populate('perfilusuario');   
+            const allUsuarios = await Usuarios.find().populate('perfilusuario');   
               return allUsuarios;   
             
         } catch (error) {
@@ -29,13 +29,16 @@ module.exports = class usuarioService {
                 nome: data.nome,
                 endereco: data.endereco,
                 telefone: data.telefone,
-                cpf:      data.cpf,
+                cpf: data.cpf,
+                email: data.email,
                 perfilusuario: data.perfilusuario,
                 profissao: data.profissao,
+                login: data.login,
+                senha: data.senha,
                 dataCriacao: data.dataCriacao,
                 dataAtualizacao: data.dataAtualizacao,
             };
-            const response = await new usuariosColecao(newUsuario).save();
+            const response = await new Usuarios(newUsuario).save();
             return response;
 
         }   catch (error){
@@ -45,7 +48,7 @@ module.exports = class usuarioService {
 
     static async updateUsuario(id, usuario) {
         try {
-          const updateResponse = await usuariosColecao.updateOne(
+          const updateResponse = await Usuarios.updateOne(
             { _id: id },
             { ...usuario, dataAtualizacao: new Date() }
           );
@@ -58,7 +61,7 @@ module.exports = class usuarioService {
     
     static async deleteUsuario(usuarioId) {
       try {
-        const deletedResponse = await usuariosColecao.findOneAndDelete({ _id: usuarioId });
+        const deletedResponse = await Usuarios.findOneAndDelete({ _id: usuarioId });
         return deletedResponse;
       } catch (error) {
         console.log(`Não foi possível deletar este usuario ${error}`);
@@ -67,7 +70,7 @@ module.exports = class usuarioService {
 
     static async deleteTodosUsuarios() {
       try {
-        const deletedAllResponse = await usuariosColecao.deleteMany();
+        const deletedAllResponse = await Usuarios.deleteMany();
         return deletedAllResponse;
       } catch (error) {
         res.status(500).json(`Ocorreu um erro!`);

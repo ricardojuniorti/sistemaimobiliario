@@ -11,16 +11,15 @@ const sistemaImobiliarioSchema = Schema({
         type: String,
         require: true
     },
-    cpf: {
+    telefone: {
         type: String,
         require: false
     },
-    perfilusuario: {
-        type: mongoose.ObjectId,
-        ref: 'perfil_usuarios', // nomde da coleção referenciada
-        require: true
+    email: {
+        type: String,
+        require: false
     },
-    telefone: {
+    cpf: {
         type: String,
         require: false
     },
@@ -28,7 +27,19 @@ const sistemaImobiliarioSchema = Schema({
         type: String,
         require: true
     },
-
+    perfilusuario: {
+        type: mongoose.ObjectId,
+        ref: 'perfil_usuarios', // nomde da coleção referenciada
+        require: true
+    },
+    login: {
+        type: String,
+        require: false
+    },
+    senha: {
+        type: String,
+        require: false
+    },
     // campos padroes de todas as tabelas
     dataCriacao: {
         type: Date,
@@ -40,4 +51,4 @@ const sistemaImobiliarioSchema = Schema({
     }
 });
 
-module.exports = usuariosColecao = mongoose.model("usuarios", sistemaImobiliarioSchema);
+module.exports = Usuarios = mongoose.model("usuarios", sistemaImobiliarioSchema);
