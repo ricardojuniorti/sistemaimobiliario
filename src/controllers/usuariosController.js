@@ -7,10 +7,9 @@ exports.get = async (req, res) => {
   
     try {
       const usuario = await usuarioService.getUsuariobyId(id);
-      res.json(usuario);
-    } catch (error) {
-
-      res.status(500).json({ error: error });
+      res.json(usuarios);
+    } catch (err) {
+      res.status(500).send("Erro ao tentar listar o usuario");
     }
 };
 
@@ -23,7 +22,7 @@ exports.getAll = async (req, res) => {
         }
         res.json(usuarios);
     }catch (err) {
-        return res.status(500).json({error: err});
+      res.status(500).send("Erro ao tentar listar todos usuarios");
     }
 }
 
