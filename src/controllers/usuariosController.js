@@ -18,7 +18,7 @@ exports.getAll = async (req, res) => {
         const usuarios = await usuarioService.getAllUsuarios();
 
         if(!usuarios){
-            return res.status(404).json({mensagem: "Nenhum usuario encontrado!"});
+            return res.status(404).json({message: "Nenhum usuario encontrado!"});
         }
         res.json(usuarios);
     }catch (error) {
@@ -27,10 +27,11 @@ exports.getAll = async (req, res) => {
 }
 
 exports.add = async (req, res) => {
+    
     try {
   
-        if(!req.body.perfilusuario){
-          res.status(404).json({ error: 'Existem campos obrigatórios não preenchidos!'});
+        if(!req.body.perfilusuario || !req.body.nome){ // campos obrigatorios
+          res.status(422).json({ error: 'Existem campos obrigatórios não preenchidos!'});
         }
         else{
           const createdUsuario = await usuarioService.addUsuario(req.body);
