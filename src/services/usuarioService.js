@@ -1,5 +1,5 @@
 const { deleteMany } = require("../models/usuariosModel");
-const usuarios = require("../models/usuariosModel");
+const Usuarios = require("../models/usuariosModel");
 
 module.exports = class usuarioService {
 

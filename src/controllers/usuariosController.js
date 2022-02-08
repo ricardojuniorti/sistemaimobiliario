@@ -18,7 +18,7 @@ exports.getAll = async (req, res) => {
         const usuarios = await usuarioService.getAllUsuarios();
 
         if(!usuarios){
-            return res.status(404).json("Nenhum usuario encontrado!");
+            return res.status(404).json({mensagem: "Nenhum usuario encontrado!"});
         }
         res.json(usuarios);
     }catch (error) {
@@ -28,9 +28,15 @@ exports.getAll = async (req, res) => {
 
 exports.add = async (req, res) => {
     try {
-        const createdUsuario = await usuarioService.addUsuario(req.body);
-        res.status(201).json(createdUsuario);
-        
+  
+        if(!req.body.perfilusuario){
+          res.status(404).json({ error: 'Existem campos obrigatórios não preenchidos!'});
+        }
+        else{
+          const createdUsuario = await usuarioService.addUsuario(req.body);
+          res.status(201).json(createdUsuario);
+        }
+
     }catch (error) {
       res.status(500).json({ error: error});
     }
@@ -68,10 +74,9 @@ exports.update = async (req, res) => {
   
 exports.delete = async (req, res) => {
     //let id = req.params.id;
-  
     try {
       const deleteResponse = await usuarioService.deleteUsuario(req.body._id);
-      res.json(deleteResponse);
+      res.json({deleteResponse});
     } catch (error) {
       res.status(500).json({ error: error });
     }

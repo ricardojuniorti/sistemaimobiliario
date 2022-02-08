@@ -17,8 +17,8 @@ module.exports = {
                     //useCreateIndex: true,
                 }
             )
-            .then((res) => console.log(`conexao com sucesso:${res}`))
-            .catch((err) => console.log(`error: ${err}`));
+            .then((res) => console.log(`conexao ao mongo com sucesso:${res}`))
+            .catch((err) => console.log(err));
     },
 
 };

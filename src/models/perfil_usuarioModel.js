@@ -17,4 +17,4 @@ const sistemaImobiliarioSchema = Schema({
     },
 });
 
-module.exports = perfil_usuarioColecao = mongoose.model("perfil_usuarios", sistemaImobiliarioSchema);
+module.exports = Perfil_usuarios = mongoose.model("perfil_usuarios", sistemaImobiliarioSchema);

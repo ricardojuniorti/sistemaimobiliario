@@ -19,7 +19,7 @@ exports.getAll = async (req, res) => {
         const perfil_usuarios = await perfil_usuarioService.getAllPerfil_usuarios();
 
         if(!perfil_usuarios){
-            return res.status(404).json("Nenhum registro encontrado!");
+            return res.status(404).json({mensagem:"Nenhum registro encontrado!"});
         }
         res.json(perfil_usuarios);
     }catch (error) {
@@ -59,10 +59,13 @@ exports.update = async (req, res) => {
 };
   
 exports.delete = async (req, res) => {
-    let id = req.params.id;
+    //let id = req.params.id;
   
     try {
-      const deleteResponse = await perfil_usuarioService.deletePerfil_usuario(id);
+      const deleteResponse = await perfil_usuarioService.deletePerfil_usuario(req.body._id);
+      if(!deleteResponse){
+        return res.status(404).json({mensagem: "registro não encontrado!"});  
+      }
       res.json(deleteResponse);
     } catch (error) {
       res.status(500).json({ error: error });
