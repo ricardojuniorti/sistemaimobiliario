@@ -7,6 +7,9 @@ exports.get = async (req, res) => {
   
     try {
       const usuarios = await usuarioService.getUsuariobyId(id);
+      if(!usuarios){
+        res.status(404).json({error: "Usuário não encontrado!"});
+      }
       res.status(200).json(usuarios);
     } catch (error) {
       res.status(500).json({ error: error});
