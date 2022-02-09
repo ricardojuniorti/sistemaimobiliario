@@ -56,7 +56,7 @@ module.exports = class perfil_usuarioService {
         const deletedResponse = await Perfil_usuarios.findOneAndDelete({ _id: perfil_usuarioId });
         return deletedResponse;
       } catch (error) {
-        console.log(`Não foi possível deletar este usuario ${error}`);
+        return console.log(`Não foi possível deletar este usuario: ${error}`);
       }
     }
 
@@ -64,8 +64,8 @@ module.exports = class perfil_usuarioService {
       try {
         const deletedAllResponse = await Perfil_usuarios.deleteMany();
         return deletedAllResponse;
-      } catch (error) {res.status(201).json(`Registro adicionado com sucesso!`);
-        console.log(`Não foi possível deletar todos${error}`);
+      } catch (error) {
+        console.log(`Não foi possível deletar todos: ${error}`);
       }
     }
 

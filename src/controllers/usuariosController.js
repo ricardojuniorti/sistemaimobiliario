@@ -8,7 +8,7 @@ exports.get = async (req, res) => {
     try {
       const usuarios = await usuarioService.getUsuariobyId(id);
       if(!usuarios){
-        res.status(404).json({error: "Usuário não encontrado!"});
+        res.status(404).json({error: "Registro não encontrado!"});
       }
       res.status(200).json(usuarios);
     } catch (error) {
@@ -21,7 +21,7 @@ exports.getAll = async (req, res) => {
         const usuarios = await usuarioService.getAllUsuarios();
 
         if(!usuarios){
-            return res.status(404).json({message: "Nenhum usuario encontrado!"});
+            return res.status(404).json({message: "Nenhum registro encontrado!"});
         }
         res.json(usuarios);
     }catch (error) {
@@ -34,11 +34,12 @@ exports.add = async (req, res) => {
     try {
   
         if(!req.body.perfilusuario || !req.body.nome){ // campos obrigatorios
-          res.status(422).json({ error: 'Existem campos obrigatórios não preenchidos!'});
+          res.status(422).json({ error: 'Campos obrigatórios não preenchidos!'});
         }
         else{
           const createdUsuario = await usuarioService.addUsuario(req.body);
-          res.status(201).json(createdUsuario);
+          res.status(201).json({message: 'Registro cadastrado com sucesso!'});
+          console.log(createdUsuario);
         }
 
     }catch (error) {
@@ -48,7 +49,7 @@ exports.add = async (req, res) => {
 }
 
 exports.update = async (req, res) => {
-    let id = req.params.id;
+    //let id = req.params.id;
   
     try {
       const usuario = {};
@@ -64,7 +65,7 @@ exports.update = async (req, res) => {
       usuario.dataCriacao = req.body.dataCriacao;
       usuario.dataAtualizacao = req.body.dataAtualizacao;
   
-      const updatedUsuario = await usuarioService.updateUsuario(id, usuario);
+      const updatedUsuario = await usuarioService.updateUsuario(req.body._id, usuario);
   
       if (updatedUsuario.nModified === 0) {
         return res.status(404).json({});

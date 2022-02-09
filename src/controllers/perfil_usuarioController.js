@@ -7,6 +7,9 @@ exports.get = async (req, res) => {
   
     try {
       const perfil_usuario = await perfil_usuarioService.getPerfil_usuariobyId(id);
+      if(!perfil_usuario){
+        res.status(404).json({error: "Registro não encontrado!"});
+      }
       res.json(perfil_usuario);
     } catch (error) {
 
@@ -29,8 +32,14 @@ exports.getAll = async (req, res) => {
 
 exports.add = async (req, res) => {
     try {
-        const createdPerfil_usuario = await perfil_usuarioService.addPerfil_usuario(req.body);
-        res.status(201).json(createdPerfil_usuario);
+        if(!req.body.descricao){
+          res.status(422).json({message: "Campos obrigatórios não preenchidos"}); 
+        }
+        else{
+          const createdPerfil_usuario = await perfil_usuarioService.addPerfil_usuario(req.body);
+          res.status(201).json({message: "Registro cadastrado com sucesso!"});
+          console.log(createdPerfil_usuario);
+        }     
     }catch (error) {
         return res.status(500).json({ error: error});
     }
@@ -38,7 +47,7 @@ exports.add = async (req, res) => {
 }
 
 exports.update = async (req, res) => {
-    let id = req.params.id;
+    //let id = req.params.id;
   
     try {
       const perfil_usuario = {};
@@ -46,12 +55,11 @@ exports.update = async (req, res) => {
       perfil_usuario.dataCriacao = req.body.dataCriacao;
       perfil_usuario.dataAtualizacao = req.body.dataAtualizacao;
   
-      const updatedPerfil_usuario = await perfil_usuarioService.updatePerfil_usuario(id, perfil_usuario);
+      const updatedPerfil_usuario = await perfil_usuarioService.updatePerfil_usuario(req.body._id, perfil_usuario);
   
       if (updatedPerfil_usuario.nModified === 0) {
-        return res.status(404).json({});
+        return res.status(404).json({message: 'Nenhuma alteração foi realizada!'});
       }
-  
       res.json(updatedPerfil_usuario);
     } catch (error) {
       res.status(500).json({ error: error });
@@ -68,7 +76,7 @@ exports.delete = async (req, res) => {
       }
       res.json(deleteResponse);
     } catch (error) {
-      res.status(500).json({ error: error });
+      return res.status(500).json({ error: error });
     }
 };
 

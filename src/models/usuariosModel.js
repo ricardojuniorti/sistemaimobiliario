@@ -5,7 +5,7 @@ const sistemaImobiliarioSchema = Schema({
     
     nome: {
         type: String,
-        require: true
+        require: true['Informe o campo nome']
     },
     endereco: {
         type: String,
