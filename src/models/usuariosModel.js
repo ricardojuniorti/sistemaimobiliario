@@ -5,40 +5,40 @@ const sistemaImobiliarioSchema = Schema({
     
     nome: {
         type: String,
-        require: true['Informe o campo nome']
+        required: true['Informe o campo nome']
     },
     endereco: {
         type: String,
-        require: true
+        required: false
     },
     telefone: {
         type: String,
-        require: false
+        required: false
     },
     email: {
         type: String,
-        require: false
+        required: false
     },
     cpf: {
         type: String,
-        require: false
+        required: false
     },
     profissao: {
         type: String,
-        require: true
+        required: true
     },
     perfilusuario: {
         type: mongoose.ObjectId,
         ref: 'perfil_usuarios', // nomde da coleção referenciada
-        require: true
+        required: true
     },
     login: {
         type: String,
-        require: false
+        required: false
     },
     senha: {
         type: String,
-        require: false
+        required: false
     },
     // campos padroes de todas as tabelas
     dataCriacao: {
