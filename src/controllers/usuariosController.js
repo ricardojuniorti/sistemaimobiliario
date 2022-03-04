@@ -3,6 +3,7 @@ const { create } = require("../models/usuariosModel");
 const usuarioService = require("../services/usuarioService");
 
 exports.get = async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     let id = req.params.id;
   
     try {
@@ -17,6 +18,7 @@ exports.get = async (req, res) => {
 };
 
 exports.getAll = async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     try {
         const usuarios = await usuarioService.getAllUsuarios();
 
@@ -30,7 +32,7 @@ exports.getAll = async (req, res) => {
 }
 
 exports.add = async (req, res) => {
-    
+    res.setHeader('Access-Control-Allow-Origin', '*');
     try {
   
         if(!req.body.perfilusuario || !req.body.nome){ // campos obrigatorios
@@ -50,7 +52,7 @@ exports.add = async (req, res) => {
 
 exports.update = async (req, res) => {
     //let id = req.params.id;
-  
+    res.setHeader('Access-Control-Allow-Origin', '*');
     try {
       const usuario = {};
       usuario.nome = req.body.nome;
@@ -78,6 +80,7 @@ exports.update = async (req, res) => {
 };
   
 exports.delete = async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     //let id = req.params.id;
     try {
       const deleteResponse = await usuarioService.deleteUsuario(req.body._id);
@@ -88,7 +91,7 @@ exports.delete = async (req, res) => {
 };
 
 exports.deleteAll = async (req, res) => {
- 
+  res.setHeader('Access-Control-Allow-Origin', '*');
   try {
     const deletedAllResponse = await usuarioService.deleteTodosUsuarios();
     res.json(deletedAllResponse);
