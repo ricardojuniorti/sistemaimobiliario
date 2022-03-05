@@ -1,21 +1,24 @@
-const { deleteMany } = require("../models/usuariosModel");
-const Usuarios = require("../models/usuariosModel");
+const { deleteMany } = require("../models/statusModel");
+const Status = require("../models/statusModel");
 
-module.exports = class usuarioService {
+module.exports = class statusService {
 
-    static async getUsuariobyId(usuarioId) {
+    static async getStatusbyId(statusId) {
       try {
-        const usuario = await Usuarios.findById({ _id: usuarioId });
-        return usuario;
+        const status = await Status.findById({ _id: statusId });
+        if(status == null){
+          console.log("Status não encontrado!");
+        }
+        return status;
       } catch (error) {
-        console.log(`Usuario não encontrado. ${error}`);
+        console.log(`Erro interno no servidor. ${error}`);
       }
     }
 
-    static async getAllUsuarios(){
+    static async getAllStatus(){
         try {
-            const allUsuarios = await Usuarios.find().populate('perfilusuario');   
-              return allUsuarios;   
+            const allStatus = await Status.find();   
+              return allStatus;   
             
         } catch (error) {
             console.log(`Ocorreu um erro ao retornar os dados`);
@@ -23,22 +26,14 @@ module.exports = class usuarioService {
 
     }
 
-    static async addUsuario(data){
+    static async addStatus(data){
         try {
-            const newUsuario = {
-                nome: data.nome,
-                endereco: data.endereco,
-                telefone: data.telefone,
-                cpf: data.cpf,
-                email: data.email,
-                perfilusuario: data.perfilusuario,
-                profissao: data.profissao,
-                login: data.login,
-                senha: data.senha,
-                dataCriacao: data.dataCriacao,
-                dataAtualizacao: data.dataAtualizacao,
+            const newStatus = {
+                id: data.id,
+                tipo: data.tipo
+               
             };
-            const response = await new Usuarios(newUsuario).save();
+            const response = await new Status(newStatus).save();
             return response;
 
         }   catch (error){
@@ -46,11 +41,11 @@ module.exports = class usuarioService {
         }
     }
 
-    static async updateUsuario(id, usuario) {
+    static async updateStatus(id, status) {
         try {
-          const updateResponse = await Usuarios.updateOne(
+          const updateResponse = await Status.updateOne(
             { _id: id },
-            { ...usuario, dataAtualizacao: new Date() }
+            { ...status}
           );
     
           return updateResponse;
@@ -59,18 +54,20 @@ module.exports = class usuarioService {
         }
     }
     
-    static async deleteUsuario(usuarioId) {
+    static async deleteStatus(statusId) {
       try {
-        const deletedResponse = await Usuarios.findOneAndDelete({ _id: usuarioId });
+        const deletedResponse = await Status.findOneAndDelete({ _id: statusId });
+    
         return deletedResponse;
+        
       } catch (error) {
         console.log(`Não foi possível deletar este usuario ${error}`);
       }
     }
 
-    static async deleteTodosUsuarios() {
+    static async deleteTodosStatus() {
       try {
-        const deletedAllResponse = await Usuarios.deleteMany();
+        const deletedAllResponse = await Status.deleteMany();
         return deletedAllResponse;
       } catch (error) {
         res.status(500).json(`Ocorreu um erro!`);

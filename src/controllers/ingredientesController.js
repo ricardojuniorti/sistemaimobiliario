@@ -28,7 +28,7 @@ exports.getAll = async (req, res) => {
         }
         res.json(ingredientes);
     }catch (error) {
-      console.log("aqui");
+      
       res.status(500).json({ error: error});
     }
 }
